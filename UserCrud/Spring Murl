@@ -1,0 +1,50 @@
+<!-- addStudent.jsp -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
+<head>
+    <title>Add Student</title>
+    <script>
+        function addAddress() {
+            var addressesContainer = document.getElementById('addressesContainer');
+            var addressIndex = addressesContainer.children.length ;
+            
+            alert(addressIndex);
+
+            var addressDiv = document.createElement('div');
+            addressDiv.innerHTML = `
+                <label for="addresses[`+addressIndex+`].city">City:</label>
+                <input type="text" id="addresses[`+addressIndex+`].city" name="addrees[`+addressIndex+`].city" />
+
+                <label for="addresses[`+addressIndex+`].state">State:</label>
+                <input type="text" id="addresses[`+addressIndex+`].state" name="addrees[`+addressIndex+`].state" />
+                <br>
+            `;
+
+            addressesContainer.appendChild(addressDiv);
+        }
+    </script>
+</head>
+<body>
+    <h2>Add Student</h2>
+    <form action="/saveStudent" method="post" modelAttribute="student">
+        <label for="name">Student Name:</label>
+        <input type="text" id="name" name="name" />
+
+        <div id="addressesContainer">
+            <!-- Initial address fields -->
+            <div>
+            <label for="addrees[0].city">City:</label>
+            <input type="text" id="addresses[0].city" name="addrees[0].city" />
+
+            <label for="addresses[0].state">State:</label>
+            <input type="text" id="addresses[0].state" name="addrees[0].state" />
+            <br>
+            </div>
+        </div>
+
+        <button type="button" onclick="addAddress()">Add Address</button>
+        <button type="submit">Save Student</button>
+    </form>
+</body>
+</html>
